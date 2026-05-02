@@ -1,293 +1,396 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ÜniKitap | Ders Kitabı Al & Sat</title>
+  <meta name="description"
+    content="Üniversite öğrencileri için ikinci el ders kitabı pazaryeri. Kampüsünüzdeki diğer öğrencilerle güvenle al ve sat.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <title>ÜniKitap</title>
-  <script src="main.js" defer></script>
+  <link rel="stylesheet" href="top.css">
+  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="panels.css">
+  <link rel="stylesheet" href="footer.css">
+  <link rel="stylesheet" href="responsive.css">
+  <link rel="icon" href="assets /unikitap.ico">
 </head>
+
 <body>
-<div id="background"></div>
-<div id="banner">Banner Goes Here</div>
-<div id="content">
-  <div id="search-bar">
-    <div id="logo">Logo Goes Here</div>
-    <div id="search-input" class="display-center">
-      <input id="search-input-field" type="text" placeholder="Kitap, yazar veya kategori ara...">
-      <button id="search-button" class="display-center" type="submit">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/>
-          <path d="M16 16L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-      </button>
-    </div>
-    <div id="utils" class="display-center">
-      <div id="fav-button" class="svg display-center" onclick="togglePanel('fav-panel')">
-        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-        </svg>
-        <div id="fav-items" class="display-center">0</div>
+
+  <!-- #region Background -->
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <!-- #endregion -->
+
+  <!-- #region Navigation -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="#" class="logo">
+        <img src="assets /unikitap.png" alt="ÜniKitap Logo" class="logo-img">
+        Üni<span>Kitap</span>
+      </a>
+      <div class="nav-links">
+        <a href="#home" class="active">Ana Sayfa</a>
+        <a href="#categories">Bölümler</a>
+        <a href="#listings">İlanlar</a>
       </div>
-      <div id="login-btn" class="svg display-center" onclick="togglePanel('login-panel')">
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.2"/>
-          <path d="M6 21V19C6 16.7909 7.79086 15 10 15H14C16.2091 15 18 16.7909 18 19V21" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-        </svg>
-      </div>
-      <div id="theme-toggle" class="svg display-center" onclick="document.documentElement.classList.toggle  ('dark-theme')">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="5"></circle>
-          <line x1="12" y1="1" x2="12" y2="3"></line>
-          <line x1="12" y1="21" x2="12" y2="23"></line>
-          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-          <line x1="1" y1="12" x2="3" y2="12"></line>
-          <line x1="21" y1="12" x2="23" y2="12"></line>
-          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-        </svg>
+      <div class="nav-actions" id="nav-actions">
+        <button class="btn btn-ghost" id="login-btn">Giriş Yap</button>
+        <button class="btn btn-primary" id="post-btn"><i class="ri-add-line"></i> <span>İlan Ver</span></button>
+        <button class="menu-toggle" id="menu-toggle">
+          <i class="ri-menu-line"></i>
+        </button>
       </div>
     </div>
-  </div>
-  <div id="categories" class="display-center">
-    <div class="card" id="onlisans" onclick="openCategory('Önlisans')">
-      <h2 class="card-title">Önlisans</h2>
-      <img src="https://placehold.co/150x200" alt="Category Image">
-    </div>
-    <div class="card" id="lisans" onclick="openCategory('Lisans')">
-      <h2 class="card-title">Lisans</h2>
-      <img src="https://placehold.co/150x200" alt="Category Image">
-    </div>
-    <div class="card" id="beseri-bilimler" onclick="openCategory('Beşeri Bilimler')">
-      <h2 class="card-title">Beşeri Bilimler</h2>
-      <img src="https://placehold.co/150x200" alt="Category Image">
-    </div>
-    <div class="card" id="bilgisayar-matematik" onclick="openCategory('Bilgisayar ve Matematik Bilimi')">
-      <h2 class="card-title">Bilgisayar ve Matematik Bilimi</h2>
-      <img src="https://placehold.co/150x200" alt="Category Image">
-    </div>
-    <div class="card" id="egitim-ogretim" onclick="openCategory('Eğitim ve Öğretim')">
-      <h2 class="card-title">Eğitim ve Öğretim</h2>
-      <img src="https://placehold.co/150x200" alt="Category Image">
-    </div>
-    <div class="card" id="hukuk" onclick="openCategory('Hukuk')">
-      <h2 class="card-title">Hukuk</h2>
-      <img src="https://placehold.co/150x200" alt="Category Image">
-    </div>
-    <div class="card" id="bakim-fitness" onclick="openCategory('Kişisel Bakım ve Fitness')">
-      <h2 class="card-title">Kişisel Bakım ve Fitness</h2>
-      <img src="https://placehold.co/150x200" alt="Category Image">
-    </div>
-    <div class="card" id="mimarlik-yapi" onclick="openCategory('Mimarlık ve Yapı')">
-      <h2 class="card-title">Mimarlık ve Yapı</h2>
-      <img src="https://placehold.co/150x200" alt="Category Image">
-    </div>
-    <div class="card" id="muhendislik" onclick="openCategory('Mühendislik')">
-      <h2 class="card-title">Mühendislik</h2>
-      <img src="https://placehold.co/150x200" alt="Category Image">
-    </div>
-    <div class="card" id="saglik-tıp" onclick="openCategory('Sağlık ve Tıp')">
-      <h2 class="card-title">Sağlık ve Tıp</h2>
-      <img src="https://placehold.co/150x200" alt="Category Image">
-    </div>
-    <div class="card" id="seyahat-turizm" onclick="openCategory('Seyahat ve Turizm')">
-      <h2 class="card-title">Seyahat ve Turizm</h2>
-      <img src="https://placehold.co/150x200" alt="Category Image">
-    </div>
-    <div class="card" id="sosyal-calismalar" onclick="openCategory('Sosyal Çalışmalar ve Medya')">
-      <h2 class="card-title">Sosyal Çalışmalar ve Medya</h2>
-      <img src="https://placehold.co/150x200" alt="Category Image">
-    </div>
-    <div class="card" id="tarim-veteriner" onclick="openCategory('Tarım ve Veteriner Çalışmaları')">
-      <h2 class="card-title">Tarım ve Veteriner Çalışmaları</h2>
-      <img src="https://placehold.co/150x200" alt="Category Image">
-    </div>
-    <div class="card" id="uygulamali-kurumsal-bilimler" onclick="openCategory('Uygulamalı ve Kurumsal Bilimler')">
-      <h2 class="card-title">Uygulamalı ve Kurumsal Bilimler</h2>
-      <img src="https://placehold.co/150x200" alt="Category Image">
-    </div>
-    <div class="card" id="sanat-tasarim" onclick="openCategory('Yaratıcı Sanatlar ve Tasarım')">
-      <h2 class="card-title">Yaratıcı Sanatlar ve Tasarım</h2>
-      <img src="https://placehold.co/150x200" alt="Category Image">
-    </div>
-    <div class="card" id="isletme-yonetim" onclick="openCategory('İşletme ve Yönetim Çalışmaları')">
-      <h2 class="card-title">İşletme ve Yönetim Çalışmaları</h2>
-      <img src="https://placehold.co/150x200" alt="Categor  y Image">
-    </div>
-  </div>
-  <div id="category-view" class="invis">
-    <div id="category-utility-bar">
-     <button id="return-btn" onclick="showMain()">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M9 14L4 9L9 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M20 20V13C20 10.7909 18.2091 9 16 9H4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg></button>
-     <h1 id="selected-category-title">Kategori Adı</h1>
-    </div>
-    <ul id="item-list">
-      <li>
-        <div class="item-card">
-          <h3>Fotoğraf</h3>
-          <h3>Kategori</h3>
-          <h3>Seviye</h3>
-          <h3>Kitap</h3>
-          <h3>Yazar</h3>
-          <h3>Fiyat</h3>
+  </nav>
+  <!-- #endregion -->
+
+
+
+  <!-- #region Main -->
+  <header class="main" id="home">
+    <div class="container main-container">
+      <div class="main-content">
+        <h1>Derslerde başarılı olmak <br> cebini boşaltmak <br> <span class="text-gradient">zorunda değil.</span></h1>
+        <p>İkinci el ders kitaplarını kampüsündeki diğer öğrencilerle güvenle al ve sat. Kargo yok, gizli ücret yok.</p>
+        <div class="search-bar">
+          <i class="ri-search-line"></i>
+          <input type="text" placeholder="ISBN, Kitap Adı, Yazar veya Ders Kodu ile ara...">
+          <button class="btn btn-primary">Ara</button>
         </div>
-      </li>
-      <li>
-        <div class="item-card">
-          <img src="https://placehold.co/100x150" alt="Dummy Book">
-          <p id="category">Örnek Kategori</p>
-          <p id="level">Örnek Seviye</p>
-          <p id="title">Örnek Kitap</p>
-          <p id="author">Örnek Yazar</p>
-          <p id="price">Örnek Fiyat</p>
-        </div>
-      </li>
-      <li>
-        <div class="item-card">
-          <img src="https://placehold.co/100x150" alt="Dummy Book">
-          <p id="category">Örnek Kategori</p>
-          <p id="level">Örnek Seviye</p>
-          <p id="title">Örnek Kitap</p>
-          <p id="author">Örnek Yazar</p>
-          <p id="price">Örnek Fiyat</p>
-        </div>
-      </li>
-      <li>
-        <div class="item-card">
-          <img src="https://placehold.co/100x150" alt="Dummy Book">
-          <p id="category">Örnek Kategori</p>
-          <p id="level">Örnek Seviye</p>
-          <p id="title">Örnek Kitap</p>
-          <p id="author">Örnek Yazar</p>
-          <p id="price">Örnek Fiyat</p>
-        </div>
-      </li>
-      <li>
-        <div class="item-card">
-          <img src="https://placehold.co/100x150" alt="Dummy Book">
-          <p id="category">Örnek Kategori</p>
-          <p id="level">Örnek Seviye</p>
-          <p id="title">Örnek Kitap</p>
-          <p id="author">Örnek Yazar</p>
-          <p id="price">Örnek Fiyat</p>
-        </div>
-      </li>
-    </ul>
-  </div>
-</div>
-
-<footer class="display-center">
-  <div>
-    <div>
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932 6.064-6.932zm-1.292 19.494h2.039L6.486 3.24H4.298l13.311 17.407z" fill="currentColor"/>
-    </svg>
-    Ünikitap
-    </div>
-    <div>
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.92.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.577.688.48C19.137 20.164 22 16.418 22 12c0-5.523-4.477-10-10-10z" fill="currentColor"/>
-    </svg>
-    Ünikitap
-    </div>
-  </div>
-  </div>
-  <div>
-    <div>
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    +123 456 789 01
-    </div>
-    <div>
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M22 6L12 13L2 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    ünikitap@example.com
-    </div>
-    </div>
-    <p>&copy; 2026 <a style="color: var(--font-color);" href="https://github.com/AlperenEnes">ÜniKitap</a> Tüm hakları saklıdır.</p>
-</footer>
-
-<div id="shade" class="invis" onclick="togglePanel('')"></div>
-
-<div id="login-panel" class="panel display-center invis">
-  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.2"/>
-    <path d="M6 21V19C6 16.7909 7.79086 15 10 15H14C16.2091 15 18 16.7909 18 19V21" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-  </svg>
-  <form id="form-login">
-    <input type="text" placeholder="Kullanıcı Adı">
-    <input type="password" placeholder="Şifre">
-    <button type="submit">Giriş Yap</button>
-  </form>
-  Hesabınız yok mu? <p id="to-sign-in" onclick="togglePanel('sign-in-panel')">Kayıt Olun</p>
-</div>
-
-<div id="sign-in-panel" class="panel display-center invis">
-  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.2"/>
-    <path d="M6 21V19C6 16.7909 7.79086 15 10 15H14C16.2091 15 18 16.7909 18 19V21" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-  </svg>
-  <form id="form-sign-in">
-    <input type="text" placeholder="E-posta">
-    <input type="text" placeholder="Kullanıcı adı">
-    <input type="password" placeholder="Şifre">
-    <button type="submit">Kayıt Ol</button>
-  </form>
-
-</div>
-
-<div id="fav-panel" class="panel display-center invis">
-<table>
-  <tr>
-    <th>Kitap Adı</th>
-    <th>Yazar</th>
-    <th>Kategori</th>
-    <th>İşlemler</th>
-  </tr>
-  <tr>
-    <td>Örnek Kitap</td>
-    <td>Örnek Yazar</td>
-    <td>Örnek Kategori</td>
-    <td>
-      <svg id="remove-fav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M3 6H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        <path d="M19 6V20C19 21 18 22 17 22H7C6 22 5 21 5 20V6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        <path d="M8 6V4C8 3 9 2 10 2H14C15 2 16 3 16 4V6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        <path d="M10 11V17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        <path d="M14 11V17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-      </svg>
-    </td>
-  </tr>
-</table>
-</div>
-
-<div id="book-detail-modal" class="panel display-center invis">
-  <div class="modal-content">
-    <svg id="book-favorite" class="svg display-center" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-    </svg>
-    <span id="close-book-modal" class="svg display-center" style="cursor:pointer">&times;</span>
-    <img id="book-modal-img" src="https:placehold.co/500x900" alt="Book picture">
-    <div class="modal-row">
-      <div class="modal-col">
-        <p id="book-modal-title"></p>
-        <p id="book-modal-author"></p>
-        <p id="book-modal-category"></p>
       </div>
-      <div class="modal-col">
-        <p id="book-modal-level"></p>
-        <p id="book-modal-price"></p>
-        <p id="book-modal-phone"></p>
+      <div class="main-visual">
+        <div class="floating-cards">
+          <div class="glass-card float-1">
+            <div class="card-img-placeholder" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+              <i class="ri-book-3-line"></i>
+            </div>
+            <div class="card-info">
+              <h4>Gray's Anatomy for Students</h4>
+              <div class="price-row">
+                <span class="price">₺1.350</span>
+                <span class="condition badge-good">İyi</span>
+              </div>
+            </div>
+          </div>
+          <div class="glass-card float-2">
+            <div class="card-img-placeholder" style="background: linear-gradient(135deg, #FF6A88 0%, #FF99AC 100%);">
+              <i class="ri-scales-3-line"></i>
+            </div>
+            <div class="card-info">
+              <h4>Türk Medeni Kanunu 2023</h4>
+              <div class="price-row">
+                <span class="price">₺450</span>
+                <span class="condition badge-like-new">Sıfır Gibi</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <p id="book-modal-description"></p>
-  </div>
-</div>
+  </header>
+  <!-- #endregion -->
 
+
+
+  <!-- #region Categories -->
+  <section class="categories section" id="categories">
+    <div class="container">
+      <div class="section-header">
+        <h2>Bölüme Göre Tara</h2>
+        <div class="scroll-controls">
+          <button class="btn-icon"><i class="ri-arrow-left-s-line"></i></button>
+          <button class="btn-icon"><i class="ri-arrow-right-s-line"></i></button>
+        </div>
+      </div>
+      <div class="category-grid">
+        <div class="category-card active" data-filter="all">
+          <i class="ri-apps-line"></i>
+          <span>Tümü</span>
+        </div>
+        <div class="category-card" data-filter="Mühendislik">
+          <i class="ri-settings-3-line"></i>
+          <span>Mühendislik</span>
+        </div>
+        <div class="category-card" data-filter="Tıp">
+          <i class="ri-heart-pulse-line"></i>
+          <span>Tıp</span>
+        </div>
+        <div class="category-card" data-filter="Hukuk">
+          <i class="ri-scales-3-line"></i>
+          <span>Hukuk</span>
+        </div>
+        <div class="category-card" data-filter="İktisat">
+          <i class="ri-line-chart-line"></i>
+          <span>İktisat</span>
+        </div>
+        <div class="category-card" data-filter="Fen Bilimleri">
+          <i class="ri-flask-line"></i>
+          <span>Fen Bilimleri</span>
+        </div>
+        <div class="category-card" data-filter="Mimarlık">
+          <i class="ri-building-2-line"></i>
+          <span>Mimarlık</span>
+        </div>
+        <div class="category-card" data-filter="Edebiyat">
+          <i class="ri-quill-pen-line"></i>
+          <span>Edebiyat</span>
+        </div>
+        <div class="category-card" data-filter="Eğitim">
+          <i class="ri-graduation-cap-line"></i>
+          <span>Eğitim</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- #endregion -->
+
+
+
+  <!-- #region Listings -->
+  <section class="listings section" id="listings">
+    <div class="container">
+      <div class="section-header">
+        <h2>Kampüste Yeni</h2>
+        <a href="#" class="view-all">Tümünü Gör <i class="ri-arrow-right-line"></i></a>
+      </div>
+      <div class="listing-grid">
+
+      </div>
+    </div>
+  </section>
+  <!-- #endregion -->
+
+
+
+  <!-- #region Auth Modal -->
+  <div id="auth-overlay" class="modal-overlay"></div>
+  <div id="auth-modal" class="modal">
+    <button class="modal-close"><i class="ri-close-line"></i></button>
+    <div class="modal-content">
+      <div class="auth-tabs">
+        <button class="auth-tab active" data-tab="login">Giriş Yap</button>
+        <button class="auth-tab" data-tab="signup">Kayıt Ol</button>
+      </div>
+
+      <form id="login-form" class="auth-form active">
+        <div class="form-group">
+          <label>E-posta</label>
+          <input type="email" name="email" required placeholder="ornek@ogrenci.edu.tr">
+        </div>
+        <div class="form-group">
+          <label>Şifre</label>
+          <input type="password" name="password" required placeholder="••••••••">
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg w-100">Giriş Yap</button>
+      </form>
+
+      <form id="signup-form" class="auth-form">
+        <div class="form-group">
+          <label>Ad Soyad</label>
+          <input type="text" name="fullname" required placeholder="Alperen Demir">
+        </div>
+        <div class="form-group">
+          <label>E-posta</label>
+          <input type="email" name="email" required placeholder="ornek@ogrenci.edu.tr">
+        </div>
+        <div class="form-group">
+          <label>Şifre</label>
+          <input type="password" name="password" required placeholder="En az 6 karakter">
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg w-100">Hesap Oluştur</button>
+      </form>
+    </div>
+  </div>
+  <!-- #endregion -->
+
+
+
+  <!-- #region Post Modal -->
+  <div id="post-overlay" class="modal-overlay"></div>
+  <div id="post-modal" class="modal modal-lg">
+    <button class="modal-close"><i class="ri-close-line"></i></button>
+    <div class="modal-content">
+      <h3>Yeni İlan Ver</h3>
+      <p>Kitabının detaylarını girerek hemen satışa başla.</p>
+
+      <form id="post-book-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Kitap Adı</label>
+            <input type="text" name="title" required placeholder="Örn: Thomas Kalkülüs">
+          </div>
+          <div class="form-group">
+            <label>Yazar</label>
+            <input type="text" name="author" required placeholder="Örn: George B. Thomas">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Bölüm / Kategori</label>
+            <select name="category" required>
+              <option value="">Seçiniz</option>
+              <option value="Mühendislik">Mühendislik</option>
+              <option value="Tıp">Tıp</option>
+              <option value="Hukuk">Hukuk</option>
+              <option value="İktisat">İktisat</option>
+              <option value="Fen Bilimleri">Fen Bilimleri</option>
+              <option value="Mimarlık">Mimarlık</option>
+              <option value="Edebiyat">Edebiyat</option>
+              <option value="Eğitim">Eğitim</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Ders (Opsiyonel)</label>
+            <input type="text" name="course" placeholder="Örn: MAT101">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Fiyat (TL)</label>
+            <input type="number" name="price" required placeholder="Örn: 250">
+          </div>
+          <div class="form-group">
+            <label>Kitap Durumu</label>
+            <select name="condition" required>
+              <option value="Yeni Gibi">Yeni Gibi</option>
+              <option value="Çok İyi">Çok İyi</option>
+              <option value="İyi">İyi</option>
+              <option value="Eski">Eski</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Durum Notu</label>
+          <input type="text" name="conditionLabel" placeholder="Örn: Sayfalarda not yok, kapak sağlam.">
+        </div>
+
+        <div class="form-group">
+          <label>Kitap Fotoğrafı (Opsiyonel)</label>
+          <div class="image-upload-wrapper">
+            <input type="file" id="book-image" accept="image/*">
+            <div id="image-preview" class="image-preview">
+                <i class="ri-image-add-line" style="font-size: 2rem; margin-bottom: 8px;"></i>
+                <p>Fotoğraf seçmek için tıklayın</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Açıklama</label>
+          <textarea name="description" rows="3" required
+            placeholder="Kitap hakkında eklemek istediğiniz detaylar..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg w-100">İlanı Yayınla</button>
+      </form>
+    </div>
+  </div>
+  <!-- #endregion -->
+
+
+
+  <!-- #region Detail Panel -->
+  <div id="panel-overlay"></div>
+  <aside id="detail-panel">
+    <button id="panel-close"><i class="ri-close-line"></i></button>
+    <div id="panel-img" class="panel-img">
+      <i id="panel-icon" class="ri-book-mark-line fallback-icon"></i>
+    </div>
+
+    <div class="panel-body">
+      <div class="panel-meta">
+        <span id="panel-course" class="course-tag"></span>
+      </div>
+      <h2 id="panel-title"></h2>
+      <p id="panel-author" class="author"></p>
+
+      <div class="panel-seller">
+        <div class="avatar-lg-placeholder"><i class="ri-user-3-line"></i></div>
+        <div>
+          <p id="panel-seller-name" class="seller-name"></p>
+          <p id="panel-time" class="time-ago-sm"></p>
+        </div>
+      </div>
+
+      <div class="panel-price-row">
+        <div class="price-wrap">
+          <span id="panel-price" class="current-price"></span>
+        </div>
+        <span id="panel-condition" class="condition-tag"></span>
+      </div>
+      <p id="panel-condition-note" class="condition-note"></p>
+
+      <div class="panel-desc-block">
+        <h4>Açıklama</h4>
+        <p id="panel-desc"></p>
+      </div>
+
+      <div class="panel-actions">
+        <button class="btn btn-primary btn-lg" style="width:100%;"><i class="ri-message-3-line"></i> Satıcıyla
+          İletişim</button>
+        <button class="btn btn-ghost btn-lg" style="width:100%;"><i class="ri-bookmark-line"></i> Favorilere
+          Ekle</button>
+      </div>
+    </div>
+  </aside>
+  <!-- #endregion -->
+
+
+
+  <!-- #region Footer -->
+  <footer>
+    <div class="container footer-container">
+      <div class="footer-brand">
+        <a href="#" class="logo">
+          <img src="unikitap.png" alt="ÜniKitap Logo" class="logo-img">
+          Üni<span>Kitap</span>
+        </a>
+        <p>Ders kitabı almanın ve satmanın en akıllı yolu. Para biriktir, çevreye katkı sağla.</p>
+        <div class="social-links">
+          <a href="#"><i class="ri-instagram-line"></i></a>
+          <a href="#"><i class="ri-twitter-x-line"></i></a>
+          <a href="#"><i class="ri-tiktok-fill"></i></a>
+          <a href="https://github.com/alperenenes" target="_blank" title="GitHub"><i class="ri-github-fill"></i></a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <div class="link-col">
+          <h4>Pazar Yeri</h4>
+          <a href="#">Ders Kitapları</a>
+          <a href="#listings" id="footer-post-link">İlan Ver</a>
+        </div>
+        <div class="link-col">
+          <h4>Destek</h4>
+          <a href="#">Yardım Merkezi</a>
+          <a href="#">Güvenlik Rehberi</a>
+          <a href="#">Bize Ulaşın</a>
+        </div>
+        <div class="link-col">
+          <h4>Yasal</h4>
+          <a href="#">Kullanım Koşulları</a>
+          <a href="#">Gizlilik Politikası</a>
+          <a href="#">Üniversite Ortakları</a>
+        </div>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>&copy; 2026 ÜniKitap. Tüm hakları saklıdır.</p>
+    </div>
+  </footer>
+  <!-- #endregion -->
+
+
+  <script src="books.js"></script>
+  <script src="main.js"></script>
 </body>
+
 </html>
